@@ -20,12 +20,19 @@ services:
     volumes:
       - traefik-certs:/letsencrypt
       - /var/run/docker.sock:/var/run/docker.sock:ro
-  memadore-dev:
+  blog:
     image: ghcr.io/memadore/memadore.dev:main
     labels:
       - traefik.enable=true
-      - traefik.http.routers.memadore-dev.rule=Host(`memadore.dev`)
-      - traefik.http.routers.memadore-dev.entrypoints=websecure
-      - traefik.http.routers.memadore-dev.tls.certresolver=letsencrypt
+      - traefik.http.routers.blog.rule=Host(`memadore.dev`)
+      - traefik.http.routers.blog.entrypoints=websecure
+      - traefik.http.routers.blog.tls.certresolver=letsencrypt
+  motorsport-notes:
+    image: ghcr.io/memadore/motorsport-notes:main
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.motorsport-notes.rule=Host(`motorsport-notes.memadore.dev`)
+      - traefik.http.routers.motorsport-notes.entrypoints=websecure
+      - traefik.http.routers.motorsport-notes.tls.certresolver=letsencrypt
 volumes:
   traefik-certs: {}
